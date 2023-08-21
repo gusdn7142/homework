@@ -646,7 +646,7 @@ public class User {
             this.postService = postService;
         }
     
-    		/*
+        /*
          * 2. 게시글 단건 조회 API
          * [GET] /posts/:postId
          * @return BasicResponse<PostRes>
@@ -686,7 +686,7 @@ public class User {
         }
     
     		/* 2. 게시글 단건 조회 (+조회수 증가) API */
-        @Transactional   //(readOnly = true)
+        @Transactional   
         public PostRes getPost(Long postId) {
     
             //게시글 단건 조회
@@ -725,7 +725,7 @@ public class User {
     ```java
     public interface PostRepository extends JpaRepository<Post, Long> {
     
-        /* 2. 게시글 단건 조회  - N+1문제 해결*/
+        /* 2. 게시글 단건 조회 */
         @Query(value="select p from Post p \n" +
                 "join fetch p.user u \n" +
                 "join fetch p.board b \n" +
@@ -910,7 +910,7 @@ public class User {
         }
     
     
-    		/*
+        /*
          * 3. 게시글 수정 API
          * [PATCH] /posts/:postId
          * @return BasicResponse<String>
@@ -960,7 +960,7 @@ public class User {
         }
     
     
-    /* 3. 게시글 수정 API */
+        /* 3. 게시글 수정 API */
         @Transactional
         public String modifyPost(PostReq postReq, Long postId, Long userId){
     
@@ -1001,7 +1001,7 @@ public class User {
     ```java
     public interface PostRepository extends JpaRepository<Post, Long> {
     
-    		/* 2. 게시글 단건 조회 */
+        /* 2. 게시글 단건 조회 */
         @Query(value="select p from Post p \n" +
                 "join fetch p.user u \n" +
                 "join fetch p.board b \n" +
@@ -1160,7 +1160,7 @@ public class User {
             this.postService = postService;
         }
     
-    		/*
+        /*
          * 4. 게시글 삭제 API
          * [PATCH] /posts/:postId/status
          * @return BasicResponse<String>
@@ -1199,7 +1199,7 @@ public class User {
             this.boardRepository = boardRepository;
         }
     
-    		/* 4. 게시글 삭제 API */
+        /* 4. 게시글 삭제 API */
         @Transactional
         public String deletePost(Long postId, Long userId){
     
@@ -1417,7 +1417,7 @@ public class User {
             this.postService = postService;
         }
     
-    		/*
+        /*
          * 5. 게시판에 속한 게시글 목록 조회 API
          * [GET] /posts/all/:boardId?pageIndex=?&size=?&keyword=?
          * @return BasicResponse<List<AllPostRes>>
@@ -1464,7 +1464,7 @@ public class User {
         }
     
     
-    		/* 5. 게시판에 속한 게시글 목록 조회 API*/
+        /* 5. 게시판에 속한 게시글 목록 조회 API*/
         public List<AllPostRes> getPosts(Long boardId, String searchWord, Pageable pageable) {
     
             //게시글 조회
@@ -1529,7 +1529,7 @@ public class User {
     <div markdown="1">
   
     ```java
-    @Transactional     //before() 메서드 롤백을 위해 필요
+    @Transactional    
     @SpringBootTest
     class PostControllerTest {
     
